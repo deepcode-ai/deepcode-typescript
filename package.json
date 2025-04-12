@@ -1,6 +1,6 @@
 {
   "name": "deepcoder",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "The official TypeScript library for the Deepcoder API",
   "author": "Deepcoder <support@khulnasoft.com>",
   "types": "dist/index.d.ts",
