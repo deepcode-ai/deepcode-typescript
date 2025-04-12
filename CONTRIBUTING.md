@@ -42,25 +42,25 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:deepcode-ai/deepcode-typescript.git
+$ npm install git+ssh://git@github.com:stainless-sdks/deepcode-typescript.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/deepcode-ai/deepcode-typescript
+$ git clone https://www.github.com/stainless-sdks/deepcode-typescript
 $ cd deepcode-typescript
 
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link deepcoder
+$ yarn link deepcode
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global deepcoder
+$ pnpm link -—global deepcode
 ```
 
 ## Running tests

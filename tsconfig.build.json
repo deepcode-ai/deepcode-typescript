@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "deepcoder/*": ["dist/src/*"],
-      "deepcoder": ["dist/src/index.ts"],
+      "deepcode/*": ["dist/src/*"],
+      "deepcode": ["dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,

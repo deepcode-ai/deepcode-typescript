@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'deepcoder/internal/uploads';
-import { toFile } from 'deepcoder/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'deepcode/internal/uploads';
+import { toFile } from 'deepcode/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

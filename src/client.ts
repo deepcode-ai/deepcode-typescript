@@ -20,22 +20,26 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { Analyze, AnalyzeAnalyzeCodeParams, AnalyzeAnalyzeCodeResponse } from './resources/analyze';
-import { Status, StatusCheckResponse } from './resources/status';
+import {
+  Analyze,
+  AnalyzeAnalyzeSourceCodeParams,
+  AnalyzeAnalyzeSourceCodeResponse,
+} from './resources/analyze';
+import { Status, StatusCheckStatusResponse } from './resources/status';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['DEEPCODER_API_KEY'].
+   * Defaults to process.env['DEEPCODE_API_KEY'].
    */
   apiKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['DEEPCODER_BASE_URL'].
+   * Defaults to process.env['DEEPCODE_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -87,7 +91,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['DEEPCODER_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['DEEPCODE_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -100,9 +104,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Deepcoder API.
+ * API Client for interfacing with the Deepcode API.
  */
-export class Deepcoder {
+export class Deepcode {
   apiKey: string | null;
 
   baseURL: string;
@@ -118,10 +122,10 @@ export class Deepcoder {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Deepcoder API.
+   * API Client for interfacing with the Deepcode API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['DEEPCODER_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['DEEPCODER_BASE_URL'] ?? https://deepcode-ai.github.io] - Override the default base URL for the API.
+   * @param {string | null | undefined} [opts.apiKey=process.env['DEEPCODE_API_KEY'] ?? null]
+   * @param {string} [opts.baseURL=process.env['DEEPCODE_BASE_URL'] ?? https://deepcode-ai.github.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -130,8 +134,8 @@ export class Deepcoder {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('DEEPCODER_BASE_URL'),
-    apiKey = readEnv('DEEPCODER_API_KEY') ?? null,
+    baseURL = readEnv('DEEPCODE_BASE_URL'),
+    apiKey = readEnv('DEEPCODE_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -141,14 +145,14 @@ export class Deepcoder {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? Deepcoder.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Deepcode.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('DEEPCODER_LOG'), "process.env['DEEPCODER_LOG']", this) ??
+      parseLogLevel(readEnv('DEEPCODE_LOG'), "process.env['DEEPCODE_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -197,7 +201,7 @@ export class Deepcoder {
         if (value === null) {
           return `${encodeURIComponent(key)}=`;
         }
-        throw new Errors.DeepcoderError(
+        throw new Errors.DeepcodeError(
           `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
         );
       })
@@ -662,10 +666,10 @@ export class Deepcoder {
     }
   }
 
-  static Deepcoder = this;
+  static Deepcode = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static DeepcoderError = Errors.DeepcoderError;
+  static DeepcodeError = Errors.DeepcodeError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -684,16 +688,16 @@ export class Deepcoder {
   analyze: API.Analyze = new API.Analyze(this);
   status: API.Status = new API.Status(this);
 }
-Deepcoder.Analyze = Analyze;
-Deepcoder.Status = Status;
-export declare namespace Deepcoder {
+Deepcode.Analyze = Analyze;
+Deepcode.Status = Status;
+export declare namespace Deepcode {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
     Analyze as Analyze,
-    type AnalyzeAnalyzeCodeResponse as AnalyzeAnalyzeCodeResponse,
-    type AnalyzeAnalyzeCodeParams as AnalyzeAnalyzeCodeParams,
+    type AnalyzeAnalyzeSourceCodeResponse as AnalyzeAnalyzeSourceCodeResponse,
+    type AnalyzeAnalyzeSourceCodeParams as AnalyzeAnalyzeSourceCodeParams,
   };
 
-  export { Status as Status, type StatusCheckResponse as StatusCheckResponse };
+  export { Status as Status, type StatusCheckStatusResponse as StatusCheckStatusResponse };
 }

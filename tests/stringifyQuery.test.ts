@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Deepcoder } from 'deepcoder';
+import { Deepcode } from 'deepcode';
 
-const { stringifyQuery } = Deepcoder.prototype as any;
+const { stringifyQuery } = Deepcode.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

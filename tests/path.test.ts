@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'deepcoder/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from 'deepcode/internal/utils/path';
 import { inspect } from 'node:util';
 
 describe('path template tag function', () => {

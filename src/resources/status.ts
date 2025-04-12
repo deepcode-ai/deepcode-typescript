@@ -8,12 +8,12 @@ export class Status extends APIResource {
   /**
    * Returns current status and health of the API.
    */
-  check(options?: RequestOptions): APIPromise<StatusCheckResponse> {
+  checkStatus(options?: RequestOptions): APIPromise<StatusCheckStatusResponse> {
     return this._client.get('/status', options);
   }
 }
 
-export interface StatusCheckResponse {
+export interface StatusCheckStatusResponse {
   status?: string;
 
   uptime?: string;
@@ -22,5 +22,5 @@ export interface StatusCheckResponse {
 }
 
 export declare namespace Status {
-  export { type StatusCheckResponse as StatusCheckResponse };
+  export { type StatusCheckStatusResponse as StatusCheckStatusResponse };
 }

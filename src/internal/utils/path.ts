@@ -1,4 +1,4 @@
-import { DeepcoderError } from '../../core/error';
+import { DeepcodeError } from '../../core/error';
 
 /**
  * Percent-encode everything that isn't safe to have in a path without encoding safe chars.
@@ -51,9 +51,7 @@ export const createPathTagFunction = (pathEncoder = encodeURIPath) =>
         return acc + spaces + arrows;
       }, '');
 
-      throw new DeepcoderError(
-        `Path parameters result in path with invalid segments:\n${path}\n${underline}`,
-      );
+      throw new DeepcodeError(`Path parameters result in path with invalid segments:\n${path}\n${underline}`);
     }
 
     return path;
