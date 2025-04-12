@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'deepcode/core/api-promise';
+import { APIPromise } from 'deepcoder/core/api-promise';
 
 import util from 'node:util';
-import Deepcode from 'deepcode';
-import { APIUserAbortError } from 'deepcode';
+import Deepcode from 'deepcoder';
+import { APIUserAbortError } from 'deepcoder';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
