@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^deepcode(/.*)?',
+              regex: '^deepcoder(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

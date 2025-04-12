@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^deepcode$': '<rootDir>/src/index.ts',
-    '^deepcode/(.*)$': '<rootDir>/src/$1',
+    '^deepcoder$': '<rootDir>/src/index.ts',
+    '^deepcoder/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',
