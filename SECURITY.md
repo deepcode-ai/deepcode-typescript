@@ -20,7 +20,7 @@ or products provided by Deepcoder please follow the respective company's securit
 
 ### Deepcoder Terms and Policies
 
-Please contact support@deepcode.dev for any questions or concerns regarding security of our services.
+Please contact support@khulnasoft.com for any questions or concerns regarding security of our services.
 
 ---
 
