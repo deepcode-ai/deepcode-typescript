@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as StatusAPI from './status';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -22,5 +23,7 @@ export interface StatusCheckStatusResponse {
 }
 
 export declare namespace Status {
-  export { type StatusCheckStatusResponse as StatusCheckStatusResponse };
+  export {
+    type StatusCheckStatusResponse as StatusCheckStatusResponse
+  };
 }

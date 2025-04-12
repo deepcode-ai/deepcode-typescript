@@ -55,12 +55,12 @@ $ cd deepcode-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link deepcoder
+$ yarn link deepcode-ai/deepcoder
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global deepcoder
+$ pnpm link -—global deepcode-ai/deepcoder
 ```
 
 ## Running tests

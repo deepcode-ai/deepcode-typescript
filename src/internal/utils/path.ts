@@ -51,7 +51,9 @@ export const createPathTagFunction = (pathEncoder = encodeURIPath) =>
         return acc + spaces + arrows;
       }, '');
 
-      throw new DeepcodeError(`Path parameters result in path with invalid segments:\n${path}\n${underline}`);
+      throw new DeepcodeError(
+        `Path parameters result in path with invalid segments:\n${path}\n${underline}`,
+      );
     }
 
     return path;
