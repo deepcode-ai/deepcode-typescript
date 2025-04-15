@@ -32,8 +32,8 @@ export let getBuiltinModule: null | ((id: string) => object | undefined) = funct
       let ObjectPrototype: {} = Blob;
       for (let next; (next = Reflect.getPrototypeOf(ObjectPrototype)); ObjectPrototype = next);
       try {
-        const kClone = Object.getOwnPropertySymbols(Blob.prototype).find(
-          (e) => e.description?.includes('clone'),
+        const kClone = Object.getOwnPropertySymbols(Blob.prototype).find((e) =>
+          e.description?.includes('clone'),
         )!;
         Object.defineProperty(ObjectPrototype, magicKey, {
           get() {

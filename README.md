@@ -1,8 +1,8 @@
-# Deepcoder TypeScript API Library
+# Deepcode TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/deepcoder.svg)](https://npmjs.org/package/deepcoder) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/deepcoder)
+[![NPM version](https://img.shields.io/npm/v/deepcode-ai/deepcoder.svg)](https://npmjs.org/package/deepcode-ai/deepcoder) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/deepcode-ai/deepcoder)
 
-This library provides convenient access to the Deepcoder REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Deepcode REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [deepcode-ai.github.io](https://deepcode-ai.github.io/docs). The full API of this library can be found in [api.md](api.md).
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:deepcode-ai/deepcode-typescript.git
+npm install deepcode-ai/deepcoder
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install deepcoder`
 
 ## Usage
 
@@ -23,14 +20,14 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
-  apiKey: process.env['DEEPCODER_API_KEY'], // This is the default and can be omitted
+const client = new Deepcode({
+  apiKey: process.env['DEEPCODE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const response = await client.analyze.analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' });
+  const response = await client.analyze.analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' });
 
   console.log(response.issues);
 }
@@ -44,15 +41,15 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
-  apiKey: process.env['DEEPCODER_API_KEY'], // This is the default and can be omitted
+const client = new Deepcode({
+  apiKey: process.env['DEEPCODE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const params: Deepcoder.AnalyzeAnalyzeCodeParams = { code: 'REPLACE_ME', language: 'REPLACE_ME' };
-  const response: Deepcoder.AnalyzeAnalyzeCodeResponse = await client.analyze.analyzeCode(params);
+  const params: Deepcode.AnalyzeAnalyzeSourceCodeParams = { code: 'REPLACE_ME', language: 'REPLACE_ME' };
+  const response: Deepcode.AnalyzeAnalyzeSourceCodeResponse = await client.analyze.analyzeSourceCode(params);
 }
 
 main();
@@ -70,9 +67,9 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const response = await client.analyze
-    .analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
+    .analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
     .catch(async (err) => {
-      if (err instanceof Deepcoder.APIError) {
+      if (err instanceof Deepcode.APIError) {
         console.log(err.status); // 400
         console.log(err.name); // BadRequestError
         console.log(err.headers); // {server: 'nginx', ...}
@@ -109,12 +106,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new Deepcoder({
+const client = new Deepcode({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.analyze.analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' }, {
+await client.analyze.analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -126,12 +123,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new Deepcoder({
+const client = new Deepcode({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.analyze.analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' }, {
+await client.analyze.analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -152,16 +149,16 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new Deepcoder();
+const client = new Deepcode();
 
 const response = await client.analyze
-  .analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
+  .analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.analyze
-  .analyzeCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
+  .analyzeSourceCode({ code: 'REPLACE_ME', language: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response.issues);
@@ -177,13 +174,13 @@ console.log(response.issues);
 
 The log level can be configured in two ways:
 
-1. Via the `DEEPCODER_LOG` environment variable
+1. Via the `DEEPCODE_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
+const client = new Deepcode({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -209,13 +206,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new Deepcoder({
-  logger: logger.child({ name: 'Deepcoder' }),
+const client = new Deepcode({
+  logger: logger.child({ name: 'Deepcode' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -279,10 +276,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 import fetch from 'my-fetch';
 
-const client = new Deepcoder({ fetch });
+const client = new Deepcode({ fetch });
 ```
 
 ### Fetch options
@@ -290,9 +287,9 @@ const client = new Deepcoder({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
+const client = new Deepcode({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -307,11 +304,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new Deepcoder({
+const client = new Deepcode({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -321,9 +318,9 @@ const client = new Deepcoder({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Deepcoder from 'deepcoder';
+import Deepcode from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
+const client = new Deepcode({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -333,10 +330,10 @@ const client = new Deepcoder({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Deepcoder from 'npm:deepcoder';
+import Deepcode from 'npm:deepcode-ai/deepcoder';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new Deepcoder({
+const client = new Deepcode({
   fetchOptions: {
     client: httpClient,
   },

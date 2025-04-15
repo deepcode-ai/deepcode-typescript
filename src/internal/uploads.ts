@@ -1,11 +1,11 @@
 import { type RequestOptions } from './request-options';
 import type { FilePropertyBag, Fetch } from './builtin-types';
-import type { Deepcoder } from '../client';
+import type { Deepcode } from '../client';
 import { type File, getFile } from './shims/file';
 import { ReadableStreamFrom } from './shims';
 
 export type BlobPart = string | ArrayBuffer | ArrayBufferView | Blob | DataView;
-type FsReadStream = AsyncIterable<Uint8Array> & { path: string | { toString(): string } };
+type FsReadStream = AsyncIterable<Uint8Array> & { path: string | {toString(): string} };
 
 // https://github.com/oven-sh/bun/issues/5980
 interface BunFile extends Blob {
@@ -27,12 +27,8 @@ export type Uploadable = File | Response | FsReadStream | BunFile;
  * Construct a `File` instance. This is used to ensure a helpful error is thrown
  * for environments that don't define a global `File` yet.
  */
-export function makeFile(
-  fileBits: BlobPart[],
-  fileName: string | undefined,
-  options?: FilePropertyBag,
-): File {
-  const File = getFile();
+export function makeFile(fileBits: BlobPart[], fileName: string | undefined, options?: FilePropertyBag): File {
+  const File = getFile()
   return new File(fileBits as any, fileName ?? 'unknown_file', options);
 }
 
@@ -61,7 +57,7 @@ export const isAsyncIterable = (value: any): value is AsyncIterable<any> =>
  */
 export const maybeMultipartFormRequestOptions = async (
   opts: RequestOptions,
-  fetch: Deepcoder | Fetch,
+  fetch: Deepcode | Fetch,
 ): Promise<RequestOptions> => {
   if (!hasUploadableValue(opts.body)) return opts;
 
@@ -72,7 +68,7 @@ type MultipartFormRequestOptions = Omit<RequestOptions, 'body'> & { body: unknow
 
 export const multipartFormRequestOptions = async (
   opts: MultipartFormRequestOptions,
-  fetch: Deepcoder | Fetch,
+  fetch: Deepcode | Fetch,
 ): Promise<RequestOptions> => {
   return { ...opts, body: await createForm(opts.body, fetch) };
 };
@@ -85,7 +81,7 @@ const supportsFormDataMap = new WeakMap<Fetch, Promise<boolean>>();
  * This function detects if the fetch function provided supports the global FormData object to avoid
  * confusing error messages later on.
  */
-function supportsFormData(fetchObject: Deepcoder | Fetch): Promise<boolean> {
+function supportsFormData(fetchObject: Deepcode | Fetch): Promise<boolean> {
   const fetch: Fetch = typeof fetchObject === 'function' ? fetchObject : (fetchObject as any).fetch;
   const cached = supportsFormDataMap.get(fetch);
   if (cached) return cached;
@@ -111,7 +107,7 @@ function supportsFormData(fetchObject: Deepcoder | Fetch): Promise<boolean> {
 
 export const createForm = async <T = Record<string, unknown>>(
   body: T | undefined,
-  fetch: Deepcoder | Fetch,
+  fetch: Deepcode | Fetch,
 ): Promise<FormData> => {
   if (!(await supportsFormData(fetch))) {
     throw new TypeError(
@@ -125,8 +121,7 @@ export const createForm = async <T = Record<string, unknown>>(
 
 // We check for Blob not File because Bun.File doesn't inherit from File,
 // but they both inherit from Blob and have a `name` property at runtime.
-const isNamedBlob = (value: object) =>
-  value instanceof getFile() || (value instanceof Blob && 'name' in value);
+const isNamedBlob = (value: object) => value instanceof getFile() || (value instanceof Blob && 'name' in value);
 
 const isUploadable = (value: unknown) =>
   typeof value === 'object' &&

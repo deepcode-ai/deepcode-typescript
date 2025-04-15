@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { Deepcoder } from '../client';
+import type { Deepcode } from '../client';
 
 export class APIResource {
-  protected _client: Deepcoder;
+  protected _client: Deepcode;
 
-  constructor(client: Deepcoder) {
+  constructor(client: Deepcode) {
     this._client = client;
   }
 }
