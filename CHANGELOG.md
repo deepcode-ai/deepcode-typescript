@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-04-26)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/deepcode-ai/deepcode-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Chores
+
+* **client:** minor internal fixes ([39c8fdc](https://github.com/deepcode-ai/deepcode-typescript/commit/39c8fdc0edf31f008c62cb96ba6a27cfdd4cd4cf))
+* **perf:** faster base64 decoding ([902e00e](https://github.com/deepcode-ai/deepcode-typescript/commit/902e00ec66235b89190367835ffb69aa5fd121e6))
+
 ## 0.1.0-alpha.2 (2025-04-12)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/deepcode-ai/deepcode-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
