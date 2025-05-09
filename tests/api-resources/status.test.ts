@@ -1,16 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Deepcoder from 'deepcoder';
+import Deepcode, { toFile } from 'deepcode-ai/deepcoder';
 
-const client = new Deepcoder({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Deepcode({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource status', () => {
   // skipped: tests are disabled for the time being
-  test.skip('check', async () => {
-    const responsePromise = client.status.check();
+  test.skip('checkStatus', async () => {
+    const responsePromise = client.status.checkStatus();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
