@@ -1,5 +1,5 @@
-import { type File, getFile } from './shims/file';
-import { BlobPart, getName, makeFile, isAsyncIterable } from './uploads';
+import { type File, getFile } from "./shims/file";
+import { BlobPart, getName, makeFile, isAsyncIterable } from "./uploads";
 import type { FilePropertyBag } from './builtin-types';
 
 type BlobLikePart = string | ArrayBuffer | ArrayBufferView | BlobLike | DataView;
@@ -65,11 +65,8 @@ const isResponseLike = (value: any): value is ResponseLike =>
   typeof value.url === 'string' &&
   typeof value.blob === 'function';
 
-export type ToFileInput =
-  | FileLike
-  | ResponseLike
-  | Exclude<BlobLikePart, string>
-  | AsyncIterable<BlobLikePart>;
+export type ToFileInput = FileLike | ResponseLike | Exclude<BlobLikePart, string> | AsyncIterable<BlobLikePart>;
+
 
 /**
  * Helper for creating a {@link File} to pass to an SDK upload method from a variety of different data formats
@@ -117,7 +114,9 @@ export async function toFile(
   return makeFile(parts, name, options);
 }
 
-async function getBytes(value: BlobLikePart | AsyncIterable<BlobLikePart>): Promise<Array<BlobPart>> {
+async function getBytes(
+  value: BlobLikePart | AsyncIterable<BlobLikePart>,
+): Promise<Array<BlobPart>> {
   let parts: Array<BlobPart> = [];
   if (
     typeof value === 'string' ||
@@ -150,3 +149,4 @@ function propsForError(value: unknown): string {
   const props = Object.getOwnPropertyNames(value);
   return `; props: [${props.map((p) => `"${p}"`).join(', ')}]`;
 }
+

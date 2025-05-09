@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AnalyzeAPI from './analyze';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -8,19 +9,16 @@ export class Analyze extends APIResource {
   /**
    * Sends source code for static analysis and optimization insights.
    */
-  analyzeCode(
-    body: AnalyzeAnalyzeCodeParams,
-    options?: RequestOptions,
-  ): APIPromise<AnalyzeAnalyzeCodeResponse> {
+  analyzeSourceCode(body: AnalyzeAnalyzeSourceCodeParams, options?: RequestOptions): APIPromise<AnalyzeAnalyzeSourceCodeResponse> {
     return this._client.post('/analyze', { body, ...options });
   }
 }
 
-export interface AnalyzeAnalyzeCodeResponse {
-  issues?: Array<AnalyzeAnalyzeCodeResponse.Issue>;
+export interface AnalyzeAnalyzeSourceCodeResponse {
+  issues?: Array<AnalyzeAnalyzeSourceCodeResponse.Issue>;
 }
 
-export namespace AnalyzeAnalyzeCodeResponse {
+export namespace AnalyzeAnalyzeSourceCodeResponse {
   export interface Issue {
     line?: number;
 
@@ -35,7 +33,7 @@ export namespace AnalyzeAnalyzeCodeResponse {
   }
 }
 
-export interface AnalyzeAnalyzeCodeParams {
+export interface AnalyzeAnalyzeSourceCodeParams {
   /**
    * Source code to analyze
    */
@@ -49,10 +47,10 @@ export interface AnalyzeAnalyzeCodeParams {
   /**
    * Optional analysis parameters
    */
-  options?: AnalyzeAnalyzeCodeParams.Options;
+  options?: AnalyzeAnalyzeSourceCodeParams.Options;
 }
 
-export namespace AnalyzeAnalyzeCodeParams {
+export namespace AnalyzeAnalyzeSourceCodeParams {
   /**
    * Optional analysis parameters
    */
@@ -71,7 +69,7 @@ export namespace AnalyzeAnalyzeCodeParams {
 
 export declare namespace Analyze {
   export {
-    type AnalyzeAnalyzeCodeResponse as AnalyzeAnalyzeCodeResponse,
-    type AnalyzeAnalyzeCodeParams as AnalyzeAnalyzeCodeParams,
+    type AnalyzeAnalyzeSourceCodeResponse as AnalyzeAnalyzeSourceCodeResponse,
+    type AnalyzeAnalyzeSourceCodeParams as AnalyzeAnalyzeSourceCodeParams
   };
 }
